@@ -11,8 +11,11 @@ public interface RequestExperienceMapper {
 //    지원서 넣기
     public void insertRequest(RequestExperienceDTO requestExperienceDTO);
 
-//    멤버 아이디로 지원 목록 최근 3개 조회
+//    멤버별 지원서 조회
     public List<RequestExperienceDTO> selectRequestById(Long id);
+
+//   멤버 아이디로 체험 개수 조회
+    public int selectRequestCountById(Long id);
 
 //    지원 내역 목록 조회
 public List<RequestExperienceDTO> selectRequestByUserId(@Param("id") Long id,@Param("experienceId") Long experienceId);

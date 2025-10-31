@@ -1,6 +1,5 @@
 package com.example.kok.service;
 
-import com.example.kok.common.exception.MemberNotFoundException;
 import com.example.kok.domain.MemberVO;
 import com.example.kok.dto.*;
 import com.example.kok.repository.*;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -130,7 +128,7 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
-//        멤버 아이디로 지원 목록 최근 3개 조회
+//        멤버 아이디로 체험 지원 목록 최근 3개 조회
         List<RequestExperienceDTO> requestExperiences =
                 requestExperienceDAO.selectAllRequestById(memberId);
 //        멤버 아이디로 인턴 지원서 최근 3개 조회
@@ -139,6 +137,12 @@ public class MemberServiceImpl implements MemberService {
 //        멤버 아이디로 게시물 최근 3개 조회
         List<PostDTO> posts =
                 communityPostDAO.findPostById(memberId);
+
+//        멤버 아이디로 체험 개수 조회
+        int requestExperienceCount = requestExperienceDAO.selectRequestCountById(memberId);
+
+//        멤버 아이디로 인턴 지원 개수 조회
+        int requestInternCount = requestInternDAO.selectRequestCountById(memberId);
 
 //        멤버 아이디로 게시물 작성 수 조회
         int postsCount = communityPostDAO.findPostsCountByMemberId(memberId);
@@ -150,10 +154,11 @@ public class MemberServiceImpl implements MemberService {
 
         userMemberDTO.setRequestExperiences(requestExperiences);
         userMemberDTO.setRequestInterns(requestInterns);
+        userMemberDTO.setRequestExperienceCount(requestExperienceCount);
+        userMemberDTO.setRequestInternCount(requestInternCount);
         userMemberDTO.setPosts(posts);
 
         return userMemberDTO;
-    }
 
     @Override
     public List<RequestExperienceDTO> findRequestExperienceByMemberId(Long memberId) {
@@ -284,7 +289,6 @@ public class MemberServiceImpl implements MemberService {
 
             member.setFilePath(preSignedUrl);
         }
-//        memberProfile.setMemberProfileUrl(preSignedUrl);
         return memberProfile;
     }
 
