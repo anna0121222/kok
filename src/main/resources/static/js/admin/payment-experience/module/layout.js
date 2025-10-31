@@ -5,31 +5,16 @@ const layout = (() => {
         let acceptText = ``;
         let rejectText = ``;
 
-        if(adminPaymentExperienceCriteriaDTO.paymentExperienceCount.acceptTotalText != null){
-            acceptText += `
-                <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.acceptTotalText}</span>
-                <span class="amount-unit">원</span>
-            `;
-        } else {
-            acceptText += `
-                <span class="span-amount">0</span>
-                <span class="amount-unit">원</span>
-            `;
-        }
+        acceptText += `
+            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.acceptTotalText}</span>
+            <span class="amount-unit">원</span>
+        `;
         acceptTotal.innerHTML = acceptText;
 
-        if(adminPaymentExperienceCriteriaDTO.paymentExperienceCount.rejectTotalText){
-            rejectText += `
-                <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.rejectTotalText}</span>
-                <span class="amount-unit">원</span>
-            `;
-        } else {
-            rejectText += `
-                <span class="span-amount">0</span>
-                <span class="amount-unit">원</span>
-            `;
-        }
-
+        rejectText += `
+            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.rejectTotalText}</span>
+            <span class="amount-unit">원</span>
+        `;
         acceptCount.innerHTML = rejectText;
 
         const paymentListContainer = document.querySelector(".member-table tbody");
