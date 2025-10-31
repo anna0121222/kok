@@ -22,7 +22,7 @@ public class AdminMembersApiController implements AdminMembersApiControllerDocs 
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("list/{page}")
+    @GetMapping("list/{page}") 
     public ResponseEntity<?> findUserMembers(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
 
         AdminMemberCriteriaDTO adminMemberCriteriaDTO = memberService.findUserMembers(page, keyword);
